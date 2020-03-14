@@ -1,0 +1,38 @@
+set folder="~/mail"
+set spoolfile="+Inbox"
+set record="+Sent"
+set postponed="+Drafts"
+set trash="+Trash"
+
+set realname="Kostis Lolos"
+set from="lolos.kostis@gmail.com"
+
+set sendmail="/usr/bin/msmtp -a account"
+
+# Vim-like keybindings.
+bind pager j next-line
+bind pager k previous-line
+bind index,pager \Cu previous-page
+bind index,pager \Cd next-page
+
+# Reload settings.
+bind index,pager ,r noop
+macro index,pager ,r ":source ~/.muttrc<ENTER>" "Mutt settings reloaded."
+
+# Do reverse search.
+bind index N search-opposite
+
+# Make the background really black
+color normal white default
+color hdrdefault cyan default
+color tree red default
+color quoted white default
+color signature cyan default
+color tilde cyan default
+color attachment brightyellow default
+color markers brightred default
+color tilde blue default
+# email addresses
+color body brightyellow default [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+
+# URLs
+color body brightblue default (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+
