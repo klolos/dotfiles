@@ -1,0 +1,8 @@
+[user]
+	name = Kostis Lolos
+	email = lolos.kostis@gmail.com
+[alias]
+	s = status
+	ss = status -sb
+	tree = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	l = log --max-count=30 --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
