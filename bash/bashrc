@@ -1,0 +1,52 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# Make `ls' colorized
+export LS_OPTIONS='--color=auto'
+eval "`dircolors`"
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lA'
+
+# Change the command prompt
+get_git_branch() {
+    git branch 2> /dev/null | sed -n 's/* \(.*\)/\1/p'
+}
+PS1='\[\033[1;30m\][\[\033[0;33m\]\w\[\033[1;30m\]] (\[\033[0;32m\]$(get_git_branch)\[\033[1;30m\]) \u@\h\n\$\[\033[0m\] '
+
+# Run a Python server
+alias python-server='python2 -m SimpleHTTPServer 666'
+
+# Make tail show a more lines by default
+alias tail='tail -n 50'
+
+# Make vim the default editor
+export VISUAL="vim"
+export EDITOR="$VISUAL"
+
+# Configure GO path
+export GOPATH="~/.go"
+export PATH="$PATH:$GOPATH/bin"
+
+# etcdctl for the v2 and v3 API
+alias etcdctl3='ETCDCTL_API=3 etcdctl'
+alias etcdctl2='ETCDCTL_API=2 etcdctl'
+
+# JSON parser
+alias json='python -m json.tool'
+
+# Recursive sed
+rsed() {
+    find . -type f -print0 | xargs -0 sed -i "$@"
+}
+
+# grep the output of ps -ef
+alias psgrep='ps -ef | grep'
+
+# Remove colors from output
+alias strip-colors='sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"'
+
+# Check that a commit has been produced by prettier
+alias prettier-check='git checkout @~1 $(git show --pretty= --name-only) && prettier --write $(git show --pretty= --name-only) && git diff @ -R'
+
+# Connect with the ssh-agent
+. ~/.ssh/agent-info
