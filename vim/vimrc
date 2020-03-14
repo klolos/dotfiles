@@ -1,0 +1,41 @@
+" Set the tab width to four
+syntax on
+filetype on
+set spelllang=en_us,el
+set textwidth=79
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set showmatch
+set smartcase
+
+" Syntax
+au BufNewFile,BufRead *.h     set filetype=c
+au BufNewFile,BufRead *.pz    set filetype=c
+au BufNewFile,BufRead *.PATCH set filetype=text
+au BufNewFile,BufRead *.patch set filetype=text
+au BufNewFile,BufRead *.mail  set filetype=text
+autocmd BufNewFile,BufRead * if expand('%:t') !~ '\.' | set textwidth=72 spell | endif
+" au BufNewFile,BufRead COMMIT_EDITMSG set filetype=gitcommit
+" au BufNewFile,BufRead git-rebase-todo set filetype=gitrebase
+
+" Special settings for various filetypes
+au FileType {make,c,cpp} set noexpandtab tabstop=8
+au FileType {text}       set textwidth=72 spell
+au FileType {rst}        set textwidth=80 tabstop=3 spell
+au FileType {gitrebase}  set nospell
+
+" Macros
+:map <f6> :set spell!<return>
+:map <f7> :e ++enc=iso-8859-7<return>
+:map <f8> :call flake8#Flake8()<return>
+
+" Greek Language Map
+set langmap=ΑA,ΒB,ΨC,ΔD,ΕE,ΦF,ΓG,ΗH,ΙI,ΞJ,ΚK,ΛL,ΜM,ΝN,ΟO,ΠP,QQ,ΡR,ΣS,ΤT,ΘU,ΩV,WW,ΧX,ΥY,ΖZ,αa,βb,ψc,δd,εe,φf,γg,ηh,ιi,ξj,κk,λl,μm,νn,οo,πp,qq,ρr,σs,τt,θu,ωv,ςw,χx,υy,ζz
+
+" Autoload plugins
+execute pathogen#infect()
+
+" Settings for ctrlp
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_custom_ignore = '.pyc$'
