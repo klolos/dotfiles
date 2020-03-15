@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo $(date) - Fetching mail...
+if mbsync arrikto ; then
+    echo $(date) - Completed successfully!
+    exit 0
+else
+    echo $(date) - Failed!
+    exit 1
+fi
