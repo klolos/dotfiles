@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. ssh-agent-stop
+ssh-agent | head -n2 > ~/.ssh/agent-info
+. ~/.ssh/agent-info
+ssh-agent-login
