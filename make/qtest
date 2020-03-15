@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+BUILD_PREFIX="/path/to/build/directory"
+
+for dir in "$@"
+do
+    qmake src/$dir
+    qmake test/$dir
+    dir="$BUILD_PREFIX/test/$dir"
+    cd $dir
+    echo "Testing $dir ..."
+    if ctest -C test-all -V; then
+        echo "Tests for $dir PASSED!"
+    else
+        echo "Tests for $dir FAILED!"
+        exit 1
+    fi
+done

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+BUILD_PREFIX="/path/to/build/directory"
+
+for dir in "$@"
+do
+    dir="$BUILD_PREFIX/$dir"
+    echo "Installing $dir ..."
+    cd $dir
+    if make install; then
+        echo "Successfully installed: $dir"
+    else
+        echo "Installation of $dir FAILED!"
+        exit 1
+    fi
+done
