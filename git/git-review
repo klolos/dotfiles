@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# git-review
+#
+# A git utility script to append review tags to the current commit's message
+# Each tag takes the format of "Reviewed-by: <AUTHOR>".
+
+cd $(git rev-parse --show-toplevel)
+
+MSG_FILE=".git/COMMIT_EDITMSG"
+
+MSG=$(git log -1 --pretty=%B)
+TAGS=""
+
+AUTHOR="$(git config --get user.name) <$(git config --get user.email)>"
+
+RB="Reviewed-by: "$AUTHOR
+if !(echo -e "$MSG" | grep -qs "^$RB"); then
+  TAGS=${TAGS}${RB}"\n"
+fi
+
+if [ -n "$TAGS" ]; then
+  echo "$MSG" > $MSG_FILE
+  sed -i "\$a$TAGS" $MSG_FILE
+  git commit --amend -F $MSG_FILE --cleanup=strip
+fi
