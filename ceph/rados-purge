@@ -1,0 +1,28 @@
+#!/bin/bash
+
+conf=/etc/ceph/cephdev0.conf
+
+if [ -z "$1" ]; then
+    echo "Usage: $(basename $0) PREFIX"
+    exit 1
+fi
+
+pools=$(rados --conf $conf lspools | grep "^$1")
+if [ -z "$pools" ]; then
+    echo "No pools to remove!"
+    exit
+fi
+
+echo "About to remove the following pools:"
+for pool in $pools
+do
+    echo $pool
+done
+
+read -p "Are you sure? [y/N] " -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    for pool in $pools
+    do
+        rados --conf $conf rmpool $pool $pool --yes-i-really-really-mean-it
+    done
+fi
