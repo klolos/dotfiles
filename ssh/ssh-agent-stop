@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 ssh-agent-logout
 killall ssh-agent &> /dev/null
 > ~/.ssh/agent-info
