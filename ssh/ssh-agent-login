@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-
-ssh-add ${SSH_AGENT_KEY_PATH:=~/.ssh/id_rsa}

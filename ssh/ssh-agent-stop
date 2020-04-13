@@ -2,7 +2,7 @@
 
 set -e
 
-ssh-agent-logout
+ssh-add -D &> /dev/null
 killall ssh-agent &> /dev/null
 > ~/.ssh/agent-info
 unset SSH_AGENT_PID
