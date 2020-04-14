@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 ssh-add -D &> /dev/null
 killall ssh-agent &> /dev/null
 > ~/.ssh/agent-info
